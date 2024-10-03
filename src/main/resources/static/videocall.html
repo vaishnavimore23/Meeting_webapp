@@ -1,68 +1,196 @@
+<!--<html>-->
+
+<!--<head>-->
+<!--    <style>-->
+<!--        #root {-->
+<!--            width: 100vw;-->
+<!--            height: 100vh;-->
+<!--            }-->
+<!--    </style>-->
+<!--</head>-->
+
+
+<!--<body>-->
+<!--    <div id="root"></div>-->
+<!--</body>-->
+<!--<script src="https://unpkg.com/@zegocloud/zego-uikit-prebuilt/zego-uikit-prebuilt.js"></script>-->
+<!--<script>-->
+<!--window.onload = function () {-->
+<!--    function getUrlParams(url) {-->
+<!--        let urlStr = url.split('?')[1];-->
+<!--        const urlSearchParams = new URLSearchParams(urlStr);-->
+<!--        const result = Object.fromEntries(urlSearchParams.entries());-->
+<!--        return result;-->
+<!--    }-->
+
+
+<!--        // Generate a Token by calling a method.-->
+<!--        // @param 1: appID-->
+<!--        // @param 2: serverSecret-->
+<!--        // @param 3: Room ID-->
+<!--        // @param 4: User ID-->
+<!--        // @param 5: Username-->
+<!--    const roomID = getUrlParams(window.location.href)['roomID'] || (Math.floor(Math.random() * 10000) + "");-->
+<!--    const userID = Math.floor(Math.random() * 10000) + "";-->
+<!--    const userName = getUrlParams(window.location.href)['username'] || "userName" + userID;-->
+<!--    const appID = 330585705;-->
+<!--    const serverSecret = "93476d52958b42c75ac38280376b8bf3";-->
+<!--    const kitToken = ZegoUIKitPrebuilt.generateKitTokenForTest(appID, serverSecret, roomID, userID, userName);-->
+
+<!--    -->
+<!--        const zp = ZegoUIKitPrebuilt.create(kitToken);-->
+<!--        zp.joinRoom({-->
+<!--            container: document.querySelector("#root"),-->
+<!--            sharedLinks: [{-->
+<!--                name: 'Personal link',-->
+<!--                url: window.location.protocol + '//' + window.location.host  + window.location.pathname + '?roomID=' + roomID,-->
+<!--            }],-->
+<!--            scenario: {-->
+<!--                mode: ZegoUIKitPrebuilt.VideoConference,-->
+<!--            },-->
+<!--                -->
+<!--           	turnOnMicrophoneWhenJoining: false,-->
+<!--           	turnOnCameraWhenJoining: false,-->
+<!--           	showMyCameraToggleButton: true,-->
+<!--           	showMyMicrophoneToggleButton: true,-->
+<!--           	showAudioVideoSettingsButton: true,-->
+<!--           	showScreenSharingButton: true,-->
+<!--           	showTextChat: true,-->
+<!--           	showUserList: true,-->
+<!--           	maxUsers: 6,-->
+<!--           	layout: "Auto",-->
+<!--           	showLayoutButton: false,-->
+<!--         -->
+<!--            });-->
+<!--}-->
+<!--</script>-->
+
+<!--</html>-->
+
 <html>
 
 <head>
-  <style>
-    #root {
-        width: 100vw;
-        height: 100vh;
+    <style>
+        #root {
+            width: 100vw;
+            height: 100vh;
         }
-  </style>
-</head>
 
+        #recordButton {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            cursor: pointer;
+            font-size: 16px;
+            border: none;
+        }
+    </style>
+</head>
 
 <body>
 <div id="root"></div>
+<button id="recordButton">Start Recording</button>
 </body>
+
 <script src="https://unpkg.com/@zegocloud/zego-uikit-prebuilt/zego-uikit-prebuilt.js"></script>
 <script>
-  window.onload = function () {
-      function getUrlParams(url) {
-          let urlStr = url.split('?')[1];
-          const urlSearchParams = new URLSearchParams(urlStr);
-          const result = Object.fromEntries(urlSearchParams.entries());
-          return result;
-      }
+    window.onload = function () {
+        function getUrlParams(url) {
+            let urlStr = url.split('?')[1];
+            const urlSearchParams = new URLSearchParams(urlStr);
+            const result = Object.fromEntries(urlSearchParams.entries());
+            return result;
+        }
 
+        const roomID = getUrlParams(window.location.href)['roomID'] || (Math.floor(Math.random() * 10000) + "");
+        const userID = Math.floor(Math.random() * 10000) + "";
+        const userName = getUrlParams(window.location.href)['username'] || "userName" + userID;
+        const appID = 330585705;
+        const serverSecret = "93476d52958b42c75ac38280376b8bf3";
+        const kitToken = ZegoUIKitPrebuilt.generateKitTokenForTest(appID, serverSecret, roomID, userID, userName);
 
-          // Generate a Token by calling a method.
-          // @param 1: appID
-          // @param 2: serverSecret
-          // @param 3: Room ID
-          // @param 4: User ID
-          // @param 5: Username
-      const roomID = getUrlParams(window.location.href)['roomID'] || (Math.floor(Math.random() * 10000) + "");
-      const userID = Math.floor(Math.random() * 10000) + "";
-      const userName = getUrlParams(window.location.href)['username'] || "userName" + userID;
-      const appID = 'GENERATE_YOURS'; // check the video on my https://youtube.con/@boualiali
-      const serverSecret = "GENERATE_YOURS"; // check the video on my https://youtube.con/@boualiali
-      const kitToken = ZegoUIKitPrebuilt.generateKitTokenForTest(appID, serverSecret, roomID, userID, userName);
+        const zp = ZegoUIKitPrebuilt.create(kitToken);
+        zp.joinRoom({
+            container: document.querySelector("#root"),
+            sharedLinks: [{
+                name: 'Personal link',
+                url: window.location.protocol + '//' + window.location.host + window.location.pathname + '?roomID=' + roomID,
+            }],
+            scenario: {
+                mode: ZegoUIKitPrebuilt.VideoConference,
+            },
 
+            turnOnMicrophoneWhenJoining: false,
+            turnOnCameraWhenJoining: false,
+            showMyCameraToggleButton: true,
+            showMyMicrophoneToggleButton: true,
+            showAudioVideoSettingsButton: true,
+            showScreenSharingButton: true,
+            showTextChat: true,
+            showUserList: true,
+            maxUsers: 6,
+            layout: "Auto",
+            showLayoutButton: false,
+        });
 
-          const zp = ZegoUIKitPrebuilt.create(kitToken);
-          zp.joinRoom({
-              container: document.querySelector("#root"),
-              sharedLinks: [{
-                  name: 'Personal link',
-                  url: window.location.protocol + '//' + window.location.host  + window.location.pathname + '?roomID=' + roomID,
-              }],
-              scenario: {
-                  mode: ZegoUIKitPrebuilt.VideoConference,
-              },
+        // Screen Recording with Audio
+        let mediaRecorder;
+        let recordedChunks = [];
 
-                 turnOnMicrophoneWhenJoining: false,
-                 turnOnCameraWhenJoining: false,
-                 showMyCameraToggleButton: true,
-                 showMyMicrophoneToggleButton: true,
-                 showAudioVideoSettingsButton: true,
-                 showScreenSharingButton: true,
-                 showTextChat: true,
-                 showUserList: true,
-                 maxUsers: 2,
-                 layout: "Auto",
-                 showLayoutButton: false,
+        const recordButton = document.getElementById("recordButton");
 
-              });
-  }
+        recordButton.onclick = async function () {
+            if (mediaRecorder && mediaRecorder.state === "recording") {
+                mediaRecorder.stop(); // Stop recording
+                recordButton.textContent = "Start Recording";
+            } else {
+                // Request screen sharing and system audio
+                const screenStream = await navigator.mediaDevices.getDisplayMedia({
+                    video: true,
+                    audio: true // This enables capturing system audio
+                });
+
+                // Request microphone audio
+                const micStream = await navigator.mediaDevices.getUserMedia({
+                    audio: true
+                });
+
+                // Combine screen and mic audio into a single stream
+                const combinedStream = new MediaStream([
+                    ...screenStream.getTracks(),       // Add screen video and system audio tracks
+                    ...micStream.getAudioTracks()      // Add microphone audio track
+                ]);
+
+                mediaRecorder = new MediaRecorder(combinedStream);
+
+                mediaRecorder.ondataavailable = function (event) {
+                    if (event.data.size > 0) {
+                        recordedChunks.push(event.data);
+                    }
+                };
+
+                mediaRecorder.onstop = function () {
+                    // Create a downloadable video file
+                    const blob = new Blob(recordedChunks, {
+                        type: "video/webm",
+                    });
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement("a");
+                    a.href = url;
+                    a.download = "screen-recording.webm";
+                    document.body.appendChild(a);
+                    a.click();
+                    URL.revokeObjectURL(url);
+                };
+
+                mediaRecorder.start(); // Start recording
+                recordButton.textContent = "Stop Recording";
+            }
+        };
+    }
 </script>
 
 </html>
